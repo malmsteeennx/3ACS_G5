@@ -1,0 +1,8 @@
+.hero {
+    background: url('https://wisforwebsite.com/wp-content/uploads/2022/12/Brown-Car-Names-Featured-Image-758x426.jpg') no-repeat center center/cover; height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
