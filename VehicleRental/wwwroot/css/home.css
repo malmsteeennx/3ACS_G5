@@ -1,0 +1,53 @@
+﻿/* home.css */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: url('/images/car-background.jpg') no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding-left: 5%;
+}
+
+    .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+    }
+
+.hero-content {
+    position: relative;
+    color: white;
+    max-width: 500px;
+    z-index: 2;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+.hero button {
+    background-color: #f4f4f4;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+    .hero button:hover {
+        background-color: #ddd;
+    }
