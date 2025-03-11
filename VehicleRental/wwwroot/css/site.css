@@ -1,22 +1,40 @@
-﻿html {
-    font-size: 14px;
+﻿body {
+    background-color: whitesmoke; 
 }
 
-@media (min-width: 768px) {
-    html {
-        font-size: 16px;
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+}
+
+.car-box {
+    display: flex;
+    align-items: center;
+    background-color: #c2a58b; 
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+    .car-box img {
+        width: 40%;
+        border-radius: 10px;
     }
+
+.car-text {
+    flex: 1;
+    padding-left: 20px;
+    color: white;
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
+    .car-text h2 {
+        font-size: 32px;
+        font-weight: bold;
+    }
 
-html {
-    position: relative;
-    min-height: 100%;
-}
-
-body {
-    margin-bottom: 60px;
-}
+    .car-text p {
+        font-size: 16px;
+        line-height: 1.5;
+    }

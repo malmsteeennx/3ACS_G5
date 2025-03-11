@@ -18,7 +18,7 @@ namespace CRUD_asp.net.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Cars()
         {
             return View();
         }
