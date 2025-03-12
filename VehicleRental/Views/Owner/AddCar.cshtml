@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Add New Car";
+}
+
+<!-- ✅ Link External CSS -->
+<link rel="stylesheet" href="~/css/addcar.css" asp-append-version="true" />
+
+<div class="overlay"></div>
+<div class="container-fluid">
+    <!-- ✅ Top Navbar -->
+    <div class="d-flex justify-content-between align-items-center navbar-custom mb-4">
+        <h2 class="text-dark">WELCOME! @ViewBag.OwnerName</h2>
+        <div>
+            <a class="btn btn-outline-dark me-2" asp-action="Dashboard">My Cars</a>
+            <a class="btn btn-custom" asp-controller="Account" asp-action="Logout">Log Out</a>
+        </div>
+    </div>
+
+    <!-- ✅ Add Car Form Container -->
+    <div class="add-car-container">
+        <h2 class="text-center">Add New Car</h2>
+        <hr>
+
+        <form method="post" asp-action="AddCar" asp-controller="Owner">
+            <div class="mb-3">
+                <label class="form-label">Brand</label>
+                <input type="text" class="form-control" name="brand" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Model</label>
+                <input type="text" class="form-control" name="model" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Year</label>
+                <input type="number" class="form-control" name="year" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Seat Capacity</label>
+                <input type="number" class="form-control" name="seats" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Fuel Type</label>
+                <input type="text" class="form-control" name="fuelType" required>
+            </div>
+            <div class="d-flex justify-content-between">
+                <button type="reset" class="btn btn-outline-secondary">Clear</button>
+                <button type="submit" class="btn btn-custom">Add</button>
+            </div>
+        </form>
+
+        <!-- ✅ Back to Dashboard (Optimized) -->
+        <div class="text-center mt-3">
+            <a asp-action="Dashboard" class="btn btn-outline-dark">← Back to Dashboard</a>
+        </div>
+    </div>
+</div>

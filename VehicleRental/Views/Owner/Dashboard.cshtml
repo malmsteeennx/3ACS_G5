@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "Owner Dashboard";
+}
+
+<!-- ✅ Link External CSS -->
+<link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true" />
+
+<div class="overlay"></div>
+<div class="container-fluid dashboard-container p-4">
+
+    <!-- ✅ Navbar with Owner's Name -->
+    <div class="d-flex justify-content-between align-items-center navbar-custom mb-4">
+        <h2 class="text-dark">WELCOME! @ViewBag.OwnerName</h2>
+        <div>
+            <a class="btn btn-outline-dark me-2" asp-action="Dashboard">My Cars</a>
+            <a class="btn btn-custom" asp-controller="Account" asp-action="Logout">Log Out</a>
+        </div>
+    </div>
+
+    <!-- ✅ My Rentals Section -->
+    <h3 class="text-light mb-3">My Rentals</h3>
+    <div class="row">
+        @if (ViewBag.RentedCars != null && ViewBag.RentedCars.Count > 0)
+        {
+            @foreach (var rental in ViewBag.RentedCars)
+            {
+                <div class="col-md-3 mb-3">
+                    <div class="car-box p-3 text-center">
+                        <img src="~/images/@rental.Vehicle.Image" class="img-fluid rounded" alt="@rental.Vehicle.Name">
+                        <h5 class="mt-2">@rental.Vehicle.Name</h5>
+                        <p>Rented by: @rental.RenterName</p>
+                        <p>From: @rental.RentDate.ToShortDateString()</p>
+                        <p>To: @(rental.ReturnDate?.ToShortDateString() ?? "Ongoing")</p>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <!-- ✅ Placeholder Boxes -->
+            @for (int i = 0; i < 4; i++)
+            {
+                <div class="col-md-3 mb-3">
+                    <div class="car-box placeholder-box"></div>
+                </div>
+            }
+        }
+    </div>
+
+    <!-- ✅ Add Car Button -->
+    <div class="text-start mt-4">
+        <a asp-action="AddCar" class="btn btn-custom">+ Add Car</a>
+    </div>
+
+</div>

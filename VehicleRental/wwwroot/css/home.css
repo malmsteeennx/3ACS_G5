@@ -7,6 +7,7 @@
     align-items: center;
     justify-content: start;
     padding-left: 5%;
+    background: url('/images/bgbg.jpg') no-repeat center center/cover;
 }
 
     .hero::before {
