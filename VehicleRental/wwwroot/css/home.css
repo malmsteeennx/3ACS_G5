@@ -29,14 +29,14 @@
 .hero h1 {
     font-size: 3rem;
     font-weight: bold;
-    color: black;
+    color: white;
     margin-bottom: 30px;
 }
 
 .hero p {
     font-size: 1.2rem;
     margin-top: 10px;
-    color: black;
+    color: white;
     margin-bottom: 100px;
 }
 
@@ -52,5 +52,5 @@
 }
 
     .hero button:hover {
-        background-color: #ddd;
+        background-color: white;
     }
