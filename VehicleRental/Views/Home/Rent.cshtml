@@ -1,5 +1,146 @@
 ﻿@{
+    ViewData["Title"] = "Rent a Car";
 }
-<div class="text-center">
-    <h1>Rent a car you want</h1>
+
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Rent a Car You Want</h1>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    @if (ViewBag.AvailableVehicles != null && ViewBag.AvailableVehicles.Count > 0)
+    {
+        <div class="row">
+            @foreach (var vehicle in ViewBag.AvailableVehicles)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <img src="@vehicle.Image" class="card-img-top" alt="@vehicle.Name"
+                             onerror="this.src='/images/default-car.png'">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">@vehicle.Name</h5>
+                            <p class="card-text">
+                                @if (!string.IsNullOrEmpty(vehicle.Model))
+                                {
+                                    <span>Model: @vehicle.Model</span>
+                                }
+                                @if (vehicle.Year > 0)
+                                {
+                                    <span>Year: @vehicle.Year</span>
+                                }
+                                @if (!string.IsNullOrEmpty(vehicle.FuelType))
+                                {
+                                    <span>Fuel: @vehicle.FuelType</span>
+                                }
+                            </p>
+                            <p class="fw-bold text-success">Price: $@vehicle.Price/day</p>
+                            <p class="text-muted">Owner: @(vehicle.Owner?.Name ?? "Unknown")</p>
+
+                            <button type="button" class="btn btn-primary rent-btn"
+                                    data-vehicle-id="@vehicle.Id"
+                                    data-vehicle-name="@vehicle.Name"
+                                    data-vehicle-price="@vehicle.Price"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#rentModal">
+                                Rent Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning text-center">
+            <i class="bi bi-exclamation-triangle me-2"></i> No vehicles available for rent at the moment.
+        </div>
+    }
 </div>
+
+<!-- Rent Modal -->
+<div class="modal fade" id="rentModal" tabindex="-1" aria-labelledby="rentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="rentModalLabel">Rent Vehicle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form asp-controller="Rent" asp-action="RentVehicle" method="post">
+                <div class="modal-body">
+                    <input type="hidden" id="vehicleId" name="vehicleId" />
+                    <input type="hidden" id="userId" name="userId" value="1" /> <!-- Default user ID -->
+
+                    <div class="mb-3">
+                        <label class="form-label">Vehicle:</label>
+                        <p id="vehicleName" class="fw-bold"></p>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Daily Rate:</label>
+                        <p id="vehiclePrice" class="fw-bold text-success"></p>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="rentalDays" class="form-label">Number of Days:</label>
+                        <input type="number" class="form-control" id="rentalDays" name="rentalDays" min="1" value="1">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Total Cost:</label>
+                        <p id="totalCost" class="fw-bold text-primary"></p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-success">Confirm Rental</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const rentButtons = document.querySelectorAll(".rent-btn");
+            const rentalDaysInput = document.getElementById("rentalDays");
+            let vehiclePrice = 0;
+
+            rentButtons.forEach(button => {
+                button.addEventListener("click", function () {
+                    const vehicleId = this.getAttribute("data-vehicle-id");
+                    const vehicleName = this.getAttribute("data-vehicle-name");
+                    vehiclePrice = parseFloat(this.getAttribute("data-vehicle-price"));
+
+                    document.getElementById("vehicleId").value = vehicleId;
+                    document.getElementById("vehicleName").textContent = vehicleName;
+                    document.getElementById("vehiclePrice").textContent = "$" + vehiclePrice.toFixed(2) + "/day";
+
+                    updateTotalCost();
+                });
+            });
+
+            rentalDaysInput.addEventListener("input", updateTotalCost);
+
+            function updateTotalCost() {
+                const days = Math.max(1, parseInt(rentalDaysInput.value) || 1);
+                const total = (vehiclePrice * days).toFixed(2);
+                document.getElementById("totalCost").textContent = "$" + total;
+            }
+        });
+    </script>
+}

@@ -1,19 +1,37 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VehicleRental.Models
 {
     public class Vehicle
     {
+        [Key]
         public int Id { get; set; }
-        public int OwnerId { get; set; }
-        public string Name { get; set; }
-        public string Image { get; set; }
 
-        [Column(TypeName = "decimal(18,2)")]  // ✅ Explicitly set decimal precision
+        [Required]
+        public string Name { get; set; } = "Unknown";  // ✅ Default value
+
+        public string Model { get; set; } = "Not specified";  // ✅ Default value
+
+        public int Year { get; set; } = 2000;  // ✅ Default value
+
+        public int SeatCapacity { get; set; } = 4; // ✅ Default value
+
+        public string FuelType { get; set; } = "Unknown"; // ✅ Default value
+
+        [Required]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
 
-        public string Status { get; set; } = "Available";
+        public string Image { get; set; } = "default-car.png"; // ✅ Default value
 
-        public Owner Owner { get; set; }
+        [Required]
+        public string Status { get; set; } = "Available"; // ✅ Default value
+
+        [Required]
+        public int OwnerId { get; set; }
+
+        [ForeignKey("OwnerId")]
+        public virtual Owner Owner { get; set; }
     }
 }

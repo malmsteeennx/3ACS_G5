@@ -29,7 +29,7 @@ namespace VehicleRental.Controllers
 
             // ✅ Fetch owner details
             var owner = await _context.Owners.FindAsync(ownerId);
-            ViewBag.OwnerName = owner?.Name ?? "Owner";
+            ViewBag.OwnerName = owner?.Name ?? "Owner"; // ✅ Display owner name in the navbar
 
             // ✅ Fetch rented cars
             var rentedCars = await _context.Rentals
@@ -49,33 +49,48 @@ namespace VehicleRental.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
+
+            int ownerId = HttpContext.Session.GetInt32("OwnerId") ?? 0;
+            var owner = _context.Owners.Find(ownerId);
+
+            ViewBag.OwnerId = ownerId;
+            ViewBag.OwnerName = owner?.Name ?? "Owner"; // ✅ Ensure Owner Name is passed
+
             return View();
         }
 
         // ✅ Add Vehicle (Handles Form Submission)
         [HttpPost]
-        public async Task<IActionResult> AddCar(string name, decimal price, string image)
+        public async Task<IActionResult> AddCar(int OwnerId, string Name, string Model, int Year, int SeatCapacity, string FuelType, decimal Price, string Image)
         {
             if (HttpContext.Session.GetString("OwnerLoggedIn") != "true")
             {
                 return RedirectToAction("Login", "Account");
             }
 
-            int ownerId = HttpContext.Session.GetInt32("OwnerId") ?? 0;
+            // ✅ Check if OwnerId is valid
+            if (OwnerId == 0)
+            {
+                TempData["ErrorMessage"] = "Invalid owner ID. Please log in again.";
+                return RedirectToAction("AddCar");
+            }
 
             var vehicle = new Vehicle
             {
-                Name = name,
-                Price = price,
-                OwnerId = ownerId,
-                Image = string.IsNullOrEmpty(image) ? "default-car.png" : image,
+                Name = Name,
+                OwnerId = OwnerId,
+                Image = string.IsNullOrEmpty(Image) ? "default-car.png" : Image,
+                Price = Price,
                 Status = "Available"
             };
 
             _context.Vehicles.Add(vehicle);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("Dashboard");
+            // ✅ Success message
+            TempData["SuccessMessage"] = "Car added successfully!";
+
+            return RedirectToAction("AddCar");
         }
 
         // ✅ Remove Vehicle
@@ -90,6 +105,22 @@ namespace VehicleRental.Controllers
             }
 
             return RedirectToAction("Dashboard", "Owner");
+        }
+
+        // ✅ Display Available Vehicles for Rent
+        public async Task<IActionResult> Rent()
+        {
+            var availableVehicles = await _context.Vehicles
+                .Include(v => v.Owner) // ✅ Fetch Owner details
+                .Where(v => v.Status == "Available")
+                .ToListAsync();
+
+            ViewBag.AvailableVehicles = availableVehicles;
+
+            // ✅ Debugging: Print vehicle count to console/log
+            Console.WriteLine("Available Vehicles Found: " + availableVehicles.Count);
+
+            return View();
         }
     }
 }
