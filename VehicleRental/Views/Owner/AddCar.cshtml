@@ -1,19 +1,15 @@
 ﻿@{
-    ViewData["Title"] = "Add New Car";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 
 <!-- ✅ Link External CSS -->
 <link rel="stylesheet" href="~/css/addcar.css" asp-append-version="true" />
 
-<div class="overlay"></div>
 <div class="container-fluid">
     <!-- ✅ Top Navbar -->
     <div class="d-flex justify-content-between align-items-center navbar-custom mb-4">
         <h2 class="text-dark">WELCOME! @ViewBag.OwnerName</h2>
-        <div>
-            <a class="btn btn-outline-dark me-2" asp-action="Dashboard">My Cars</a>
-            <a class="btn btn-custom" asp-controller="Account" asp-action="Logout">Log Out</a>
-        </div>
+       
     </div>
 
     <!-- ✅ Add Car Form Container -->

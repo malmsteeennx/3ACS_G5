@@ -1,24 +1,21 @@
 ﻿@{
-    ViewData["Title"] = "Owner Dashboard";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
+
 
 <!-- ✅ Link External CSS -->
 <link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true" />
 
-<div class="overlay"></div>
 <div class="container-fluid dashboard-container p-4">
 
     <!-- ✅ Navbar with Owner's Name -->
     <div class="d-flex justify-content-between align-items-center navbar-custom mb-4">
         <h2 class="text-dark">WELCOME! @ViewBag.OwnerName</h2>
-        <div>
-            <a class="btn btn-outline-dark me-2" asp-action="Dashboard">My Cars</a>
-            <a class="btn btn-custom" asp-controller="Account" asp-action="Logout">Log Out</a>
-        </div>
+        
     </div>
 
     <!-- ✅ My Rentals Section -->
-    <h3 class="text-light mb-3">My Rentals</h3>
+    <h3 class="text-dark">My Rentals</h3>
     <div class="row">
         @if (ViewBag.RentedCars != null && ViewBag.RentedCars.Count > 0)
         {
@@ -49,7 +46,7 @@
 
     <!-- ✅ Add Car Button -->
     <div class="text-start mt-4">
-        <a asp-action="AddCar" class="btn btn-custom">+ Add Car</a>
+        <a asp-action="AddCar" type="submit" class="btn btn-primary btn-lg">+ Add Car</a>
     </div>
 
 </div>

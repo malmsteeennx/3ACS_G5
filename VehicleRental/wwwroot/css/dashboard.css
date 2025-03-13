@@ -1,5 +1,4 @@
 ﻿body {
-    background: url('/images/bgbg.jpg') no-repeat center center/cover;
     height: 100vh;
 }
 
@@ -47,9 +46,10 @@
 }
 
 .btn-custom {
-    background: #d4a373;
+    background: rgba(255, 255, 255, 0.9);
     border: none;
-    color: white;
+    color: black;
+    border: solid;
 }
 
     .btn-custom:hover {

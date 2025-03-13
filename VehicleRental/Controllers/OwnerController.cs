@@ -89,7 +89,7 @@ namespace VehicleRental.Controllers
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToAction("Dashboard");
+            return RedirectToAction("Dashboard", "Owner");
         }
     }
 }
