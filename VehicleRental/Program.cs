@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using VehicleRental.Data; // Ensure this matches your namespace
+using VehicleRental.Data;
+using VehicleRental.Services; // Ensure this matches your namespace
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,9 +10,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<AccountService>();
+builder.Services.AddScoped<EmailService>();
 builder.Services.AddSession();
 builder.Services.AddAuthentication();
 builder.Services.AddAuthorization();
+
 
 var app = builder.Build();
 

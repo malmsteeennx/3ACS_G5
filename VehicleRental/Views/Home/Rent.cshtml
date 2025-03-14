@@ -2,6 +2,9 @@
     ViewData["Title"] = "Rent a Car";
 }
 
+<link rel="stylesheet" href="~/css/rent.css" asp-append-version="true">
+
+
 <div class="container mt-4">
     <h1 class="text-center mb-4">Rent a Car You Want</h1>
 
@@ -32,29 +35,30 @@
                              onerror="this.src='/images/default-car.png'">
                         <div class="card-body text-center">
                             <h5 class="card-title">@vehicle.Name</h5>
+
                             <p class="card-text">
                                 @if (!string.IsNullOrEmpty(vehicle.Model))
                                 {
-                                    <span>Model: @vehicle.Model</span>
+                                    <span class="d-block"><strong>Model:</strong> @vehicle.Model</span>
                                 }
                                 @if (vehicle.Year > 0)
                                 {
-                                    <span>Year: @vehicle.Year</span>
+                                    <span class="d-block"><strong>Year:</strong> @vehicle.Year</span>
                                 }
                                 @if (!string.IsNullOrEmpty(vehicle.FuelType))
                                 {
-                                    <span>Fuel: @vehicle.FuelType</span>
+                                    <span class="d-block"><strong>Fuel:</strong> @vehicle.FuelType</span>
                                 }
                             </p>
-                            <p class="fw-bold text-success">Price: $@vehicle.Price/day</p>
-                            <p class="text-muted">Owner: @(vehicle.Owner?.Name ?? "Unknown")</p>
 
-                            <button type="button" class="btn btn-primary rent-btn"
+                            <p class="fw-bold text-success">Price: $@vehicle.Price/day</p>
+                            <p class="text-muted"><strong>Owner:</strong> @(vehicle.Owner?.Name ?? "Unknown")</p>
+
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#rentModal"
                                     data-vehicle-id="@vehicle.Id"
                                     data-vehicle-name="@vehicle.Name"
-                                    data-vehicle-price="@vehicle.Price"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#rentModal">
+                                    data-vehicle-price="@vehicle.Price">
                                 Rent Now
                             </button>
                         </div>
@@ -114,33 +118,6 @@
 </div>
 
 @section Scripts {
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const rentButtons = document.querySelectorAll(".rent-btn");
-            const rentalDaysInput = document.getElementById("rentalDays");
-            let vehiclePrice = 0;
-
-            rentButtons.forEach(button => {
-                button.addEventListener("click", function () {
-                    const vehicleId = this.getAttribute("data-vehicle-id");
-                    const vehicleName = this.getAttribute("data-vehicle-name");
-                    vehiclePrice = parseFloat(this.getAttribute("data-vehicle-price"));
-
-                    document.getElementById("vehicleId").value = vehicleId;
-                    document.getElementById("vehicleName").textContent = vehicleName;
-                    document.getElementById("vehiclePrice").textContent = "$" + vehiclePrice.toFixed(2) + "/day";
-
-                    updateTotalCost();
-                });
-            });
-
-            rentalDaysInput.addEventListener("input", updateTotalCost);
-
-            function updateTotalCost() {
-                const days = Math.max(1, parseInt(rentalDaysInput.value) || 1);
-                const total = (vehiclePrice * days).toFixed(2);
-                document.getElementById("totalCost").textContent = "$" + total;
-            }
-        });
-    </script>
+    <script src="~/js/rent.js" asp-append-version="true"></script>
 }
+

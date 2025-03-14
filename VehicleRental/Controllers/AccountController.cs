@@ -3,8 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using VehicleRental.Data;
 using VehicleRental.Models;
-using System.Security.Cryptography;
-using System.Text;
+using VehicleRental.Services;
 using System.Threading.Tasks;
 
 namespace VehicleRental.Controllers
@@ -12,10 +11,12 @@ namespace VehicleRental.Controllers
     public class AccountController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly EmailService _emailService;
 
-        public AccountController(ApplicationDbContext context)
+        public AccountController(ApplicationDbContext context, EmailService emailService)
         {
             _context = context;
+            _emailService = emailService;
         }
 
         // ✅ Show Signup Page
@@ -25,32 +26,69 @@ namespace VehicleRental.Controllers
             return View();
         }
 
-        // ✅ Process Signup
+        // ✅ Process Signup with Email Verification
         [HttpPost]
         public async Task<IActionResult> Signup(string name, string email, string password, string confirmPassword)
         {
             if (password != confirmPassword)
             {
-                ViewBag.Message = "Passwords do not match!";
+                TempData["ErrorMessage"] = "Passwords do not match!";
                 return View();
             }
 
             if (await _context.Owners.AnyAsync(o => o.Email == email))
             {
-                ViewBag.Message = "Email already exists!";
+                TempData["ErrorMessage"] = "Email already exists!";
                 return View();
             }
 
-            var hashedPassword = HashPassword(password);
-            var owner = new Owner { Name = name, Email = email, PasswordHash = hashedPassword };
+            var hashedPassword = EmailService.HashPassword(password);
+            var verificationToken = System.Guid.NewGuid().ToString(); // Generate a unique token
+
+            var owner = new Owner
+            {
+                Name = name,
+                Email = email,
+                PasswordHash = hashedPassword,
+                IsVerified = false,
+                VerificationToken = verificationToken
+            };
 
             _context.Owners.Add(owner);
             await _context.SaveChangesAsync();
 
-            HttpContext.Session.SetString("OwnerLoggedIn", "true");
-            HttpContext.Session.SetInt32("OwnerId", owner.Id);
+            string domain = "https://e1f4-136-158-33-136.ngrok-free.app"; // Replace with your actual ngrok URL
+            string verificationLink = $"{domain}/Account/VerifyEmail?token={verificationToken}";
 
-            return RedirectToAction("Dashboard", "Owner");
+            // ✅ Send Verification Email
+            string emailBody = $"<h2>Welcome to Vehicle Rental</h2><p>Please verify your email by clicking <a href='{verificationLink}'>here</a>.</p>";
+
+            await _emailService.SendEmailAsync(owner.Email, "Verify Your Email", emailBody);
+
+            TempData["SuccessMessage"] = "Signup successful! Please check your email to verify your account.";
+            return RedirectToAction("Login");
+        }
+
+        // ✅ Email Verification Method
+        public async Task<IActionResult> VerifyEmail(string token)
+        {
+            if (string.IsNullOrEmpty(token))
+            {
+                return BadRequest("Invalid verification link.");
+            }
+
+            var owner = await _context.Owners.FirstOrDefaultAsync(o => o.VerificationToken == token);
+            if (owner == null)
+            {
+                return BadRequest("Invalid or expired verification token.");
+            }
+
+            owner.IsVerified = true;
+            owner.VerificationToken = null;
+            await _context.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = "Email verified successfully! You can now log in.";
+            return RedirectToAction("Login");
         }
 
         // ✅ Show Login Page
@@ -60,14 +98,21 @@ namespace VehicleRental.Controllers
             return View();
         }
 
-        // ✅ Process Login
+        // ✅ Process Login (Only Allow Verified Users)
         [HttpPost]
         public async Task<IActionResult> Login(string email, string password)
         {
             var owner = await _context.Owners.FirstOrDefaultAsync(o => o.Email == email);
-            if (owner == null || !VerifyPassword(password, owner.PasswordHash))
+
+            if (owner == null || !EmailService.VerifyPassword(password, owner.PasswordHash))
             {
-                ViewBag.Message = "Invalid email or password!";
+                TempData["ErrorMessage"] = "Invalid email or password!";
+                return View();
+            }
+
+            if (!owner.IsVerified)
+            {
+                TempData["ErrorMessage"] = "Please verify your email before logging in.";
                 return View();
             }
 
@@ -82,21 +127,6 @@ namespace VehicleRental.Controllers
         {
             HttpContext.Session.Clear();
             return RedirectToAction("Login");
-        }
-
-        // 🔒 Secure Password Hashing
-        private string HashPassword(string password)
-        {
-            using var sha256 = SHA256.Create();
-            var bytes = Encoding.UTF8.GetBytes(password);
-            var hash = sha256.ComputeHash(bytes);
-            return Convert.ToBase64String(hash);
-        }
-
-        // 🔒 Verify Hashed Password
-        private bool VerifyPassword(string password, string hashedPassword)
-        {
-            return HashPassword(password) == hashedPassword;
         }
     }
 }

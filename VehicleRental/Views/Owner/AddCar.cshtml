@@ -12,6 +12,13 @@
     </div>
 
     <!-- ✅ Show Success Message if Car was Added -->
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger text-center">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
     @if (TempData["SuccessMessage"] != null)
     {
         <div class="alert alert-success text-center">

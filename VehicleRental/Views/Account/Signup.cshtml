@@ -10,6 +10,11 @@
                     <h2 class="text-center mb-4">Sign Up</h2>
                     <p class="text-center text-muted mb-4">Create an account to start renting vehicles.</p>
 
+                    @if (TempData["ErrorMessage"] != null)
+                    {
+                        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+                    }
+
                     <form method="post" asp-action="Signup">
                         <div class="mb-3">
                             <label for="name" class="form-label">Full Name</label>
@@ -37,7 +42,7 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="d-grid gap-2">
+                        <div class="d-grid">
                             <button type="submit" class="btn btn-success btn-lg">Sign Up</button>
                         </div>
                     </form>

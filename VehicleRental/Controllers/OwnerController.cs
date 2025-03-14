@@ -68,16 +68,35 @@ namespace VehicleRental.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            // ✅ Check if OwnerId is valid
             if (OwnerId == 0)
             {
                 TempData["ErrorMessage"] = "Invalid owner ID. Please log in again.";
                 return RedirectToAction("AddCar");
             }
 
+            // ✅ Check if a car with the same details already exists
+            bool carExists = await _context.Vehicles.AnyAsync(v =>
+                v.Name == Name &&
+                v.Model == Model &&
+                v.Year == Year &&
+                v.FuelType == FuelType &&
+                v.SeatCapacity == SeatCapacity &&
+                v.OwnerId == OwnerId
+            );
+
+            if (carExists)
+            {
+                TempData["ErrorMessage"] = "This car already exists in your inventory!";
+                return RedirectToAction("AddCar");
+            }
+
             var vehicle = new Vehicle
             {
                 Name = Name,
+                Model = Model,
+                Year = Year,
+                SeatCapacity = SeatCapacity,
+                FuelType = FuelType,
                 OwnerId = OwnerId,
                 Image = string.IsNullOrEmpty(Image) ? "default-car.png" : Image,
                 Price = Price,
@@ -87,9 +106,7 @@ namespace VehicleRental.Controllers
             _context.Vehicles.Add(vehicle);
             await _context.SaveChangesAsync();
 
-            // ✅ Success message
             TempData["SuccessMessage"] = "Car added successfully!";
-
             return RedirectToAction("AddCar");
         }
 
