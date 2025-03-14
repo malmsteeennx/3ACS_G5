@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using VehicleRental.Data;
 using VehicleRental.Models;
 using VehicleRental.Services;
@@ -12,11 +13,13 @@ namespace VehicleRental.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly EmailService _emailService;
+        private readonly IConfiguration _config;
 
-        public AccountController(ApplicationDbContext context, EmailService emailService)
+        public AccountController(ApplicationDbContext context, EmailService emailService, IConfiguration config)
         {
             _context = context;
             _emailService = emailService;
+            _config = config;
         }
 
         // ✅ Show Signup Page
@@ -57,7 +60,13 @@ namespace VehicleRental.Controllers
             _context.Owners.Add(owner);
             await _context.SaveChangesAsync();
 
-            string domain = "https://e1f4-136-158-33-136.ngrok-free.app"; // Replace with your actual ngrok URL
+            // ✅ Ngrok Optional: Use Configured Domain or Fallback to Localhost
+            string domain = _config["AppSettings:Domain"]; // Get domain from config
+            if (string.IsNullOrEmpty(domain))
+            {
+                domain = $"{Request.Scheme}://{Request.Host}"; // Fallback to localhost
+            }
+
             string verificationLink = $"{domain}/Account/VerifyEmail?token={verificationToken}";
 
             // ✅ Send Verification Email
