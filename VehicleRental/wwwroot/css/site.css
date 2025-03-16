@@ -1,9 +1,8 @@
 ﻿body {
-    background-color: whitesmoke; 
+    background-color: whitesmoke;
 }
 
 .container {
-    max-width: 1000px;
     margin: auto;
     padding: 20px;
 }
@@ -11,12 +10,18 @@
 .car-box {
     display: flex;
     align-items: center;
-    background-color: #c2a58b; 
+    background-color: #c2a58b;
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 20px;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
 }
+
+    .car-box:hover {
+        transform: scale(1.05);
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+    }
 
     .car-box img {
         width: 40%;
@@ -38,3 +43,101 @@
         font-size: 16px;
         line-height: 1.5;
     }
+
+.about-us-slider {
+    position: relative;
+    overflow: hidden;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.about-us-slide {
+    display: none;
+    background-color: #f8f9fa;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.5s ease-in-out;
+}
+
+    .about-us-slide p {
+        font-size: 24px;
+        line-height: 1.5;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+    .about-us-slide h2 {
+        font-size: 50px;
+        line-height: 1.5;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+
+    .about-us-slide.active {
+        display: block;
+        opacity: 1;
+    }
+
+.slider-controls {
+    text-align: center;
+    margin-top: 20px;
+}
+
+    .slider-controls button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        margin: 0 5px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+        .slider-controls button:hover {
+            background-color: #0056b3;
+        }
+
+.reviewer-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    margin-top: 10px;
+}
+
+
+.pronoun-text {
+    font-size: 0.875rem;
+    color: gray; 
+    margin-top: -10px; 
+}
+
+.card {
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+.ad-img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.ad-text {
+    font-size: 20px; /* Adjust the font size as needed */
+    line-height: 2;
+    margin: 20px;
+}
+
+.ad-text1 {
+    font-size: 20px; /* Adjust the font size as needed */
+    line-height: 1.7;
+    margin: 20px;
+}
+
