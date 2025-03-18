@@ -1,0 +1,27 @@
+﻿.footer {
+    background-color: #007bff;
+    color: white; /* Set all text to white */
+    padding: 20px;
+    text-align: center;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+.logo {
+    height: 50px;
+}
+
+.footer-link {
+    color: white; /* Keep GitHub link white */
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+    .footer-link:hover {
+        text-decoration: underline;
+    }
