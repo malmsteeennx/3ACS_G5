@@ -139,5 +139,23 @@ namespace VehicleRental.Controllers
 
             return View();
         }
+        public async Task<IActionResult> MyCars()
+        {
+            if (HttpContext.Session.GetString("OwnerLoggedIn") != "true")
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            int ownerId = HttpContext.Session.GetInt32("OwnerId") ?? 0;
+
+            var owner = await _context.Owners.FindAsync(ownerId);
+            ViewBag.OwnerName = owner?.Name ?? "Owner"; // ✅ Ensure Owner's Name is Passed
+
+            var vehicles = await _context.Vehicles.Where(v => v.OwnerId == ownerId).ToListAsync();
+            ViewBag.MyVehicles = vehicles;
+
+            return View();
+        }
+
     }
 }
