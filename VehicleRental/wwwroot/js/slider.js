@@ -4,26 +4,25 @@
 
     function showSlide(index) {
         slides.forEach((slide, i) => {
-            slide.classList.remove('active');
+            slide.classList.remove('active', 'prev', 'next');
+
             if (i === index) {
                 slide.classList.add('active');
+            } else if (i < index) {
+                slide.classList.add('prev'); // Moves left
+            } else {
+                slide.classList.add('next'); // Moves right
             }
         });
     }
 
-    document.querySelectorAll('.prev-slide').forEach(button => {
-        button.addEventListener('click', function () {
-            currentSlide = (currentSlide > 0) ? currentSlide - 1 : slides.length - 1;
-            showSlide(currentSlide);
-        });
-    });
+    function nextSlide() {
+        currentSlide = (currentSlide < slides.length - 1) ? currentSlide + 1 : 0;
+        showSlide(currentSlide);
+    }
 
-    document.querySelectorAll('.next-slide').forEach(button => {
-        button.addEventListener('click', function () {
-            currentSlide = (currentSlide < slides.length - 1) ? currentSlide + 1 : 0;
-            showSlide(currentSlide);
-        });
-    });
+    // Auto-slide every 5 seconds
+    setInterval(nextSlide, 5000);
 
     showSlide(currentSlide);
 });

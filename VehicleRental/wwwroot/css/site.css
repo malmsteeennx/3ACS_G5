@@ -1,53 +1,68 @@
-﻿body {
-    .about-us-slider {
-        position: relative;
-        overflow: hidden;
-    }
-
-    .about-us-slide {
-        opacity: 0;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        transform: translateX(100%);
-        transition: all 0.5s ease;
-        padding: 20px;
-    }
-
-    .about-us-slide.active {
-        opacity: 1;
-        position: relative;
-        transform: translateX(0);
-    }
-
-    .slide-nav {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 20px;
-    }
-
-    .prev-slide, .next-slide {
-        background-color: #007bff;
-        color: white;
-        border: none;
-        padding: 8px 15px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-
-    .prev-slide:hover, .next-slide:hover {
-        background-color: #0056b3;
-    }
+﻿/* ✅ Global Styles */
+body {
     background-color: whitesmoke;
 }
 
-.container {
-    margin: auto;
+/* ✅ About Us Section (Slider) */
+.about-us-slider {
+    position: relative;
+    width: 900px; /* Fixed width */
+    height: 280px; /* Fixed height */
+    margin: 0 auto;
+    overflow: hidden;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.about-us-slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
     padding: 20px;
 }
 
+    .about-us-slide.active {
+        opacity: 1;
+        transform: translateY(0);
+        position: relative;
+        animation: fadeInUp 0.8s ease-in-out;
+    }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.about-us-slide h2 {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.about-us-slide p {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+/* ✅ Car Box */
 .car-box {
     display: flex;
     align-items: center;
@@ -85,59 +100,7 @@
         line-height: 1.5;
     }
 
-.about-us-slider {
-    position: relative;
-    overflow: hidden;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
-}
-
-.about-us-slide {
-    display: none;
-    background-color: #f8f9fa;
-    padding: 50px;
-    border-radius: 10px;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
-    transition: opacity 0.5s ease-in-out;
-}
-
-    .about-us-slide p {
-        font-size: 24px;
-        line-height: 1.5;
-        margin-bottom: 15px;
-        text-align: center;
-    }
-    .about-us-slide h2 {
-        font-size: 50px;
-        line-height: 1.5;
-        margin-bottom: 15px;
-        text-align: center;
-    }
-
-
-    .about-us-slide.active {
-        display: block;
-        opacity: 1;
-    }
-
-.slider-controls {
-    text-align: center;
-    margin-top: 20px;
-}
-
-    .slider-controls button {
-        background-color: #007bff;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        margin: 0 5px;
-        cursor: pointer;
-        border-radius: 5px;
-    }
-
-        .slider-controls button:hover {
-            background-color: #0056b3;
-        }
-
+/* ✅ Cards & Reviews */
 .reviewer-img {
     width: 100px;
     height: 100px;
@@ -147,11 +110,10 @@
     margin-top: 10px;
 }
 
-
 .pronoun-text {
     font-size: 0.875rem;
-    color: gray; 
-    margin-top: -10px; 
+    color: gray;
+    margin-top: -10px;
 }
 
 .card {
@@ -163,6 +125,7 @@
         box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
     }
 
+/* ✅ Advertisements */
 .ad-img {
     width: 100%;
     height: auto;
@@ -171,16 +134,19 @@
 }
 
 .ad-text {
-    font-size: 20px; /* Adjust the font size as needed */
+    font-size: 20px;
     line-height: 2;
     margin: 20px;
 }
 
-.ad-text1 {
-    font-size: 20px; /* Adjust the font size as needed */
-    line-height: 1.7;
-    margin: 20px;
+/* ✅ Footer */
+.footer {
+    background-color: #007bff;
+    color: white;
+    padding: 20px;
+    text-align: center;
 }
+
 .footer-link {
     color: white;
     text-decoration: none;
@@ -190,13 +156,6 @@
     .footer-link:hover {
         text-decoration: underline;
     }
-
-.footer {
-    background-color: #007bff;
-    color: white;
-    padding: 20px;
-    text-align: center;
-}
 
 .logo-container {
     display: flex;
@@ -209,3 +168,35 @@
     height: 50px;
 }
 
+/* ✅ Smooth Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleUp {
+    from {
+        transform: scale(0.9);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+.about-us-slider,
+.car-box,
+.card {
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+.about-us-slide.active {
+    animation: scaleUp 0.5s ease-in-out;
+}

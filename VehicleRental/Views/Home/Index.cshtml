@@ -1,189 +1,144 @@
 ﻿@{
     ViewData["Title"] = "Vehicle Rental";
 }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
+<!-- ✅ Hero Section -->
 <div class="hero">
-    <div class="hero-content">
-        <h1>Find your perfect ride</h1>
+    <div class="hero-content text-center">
+        <h1>Find Your Perfect Ride</h1>
         <p>
-            Explore our wide range of cars and enjoy the freedom of the open road.<br>
-            Whether you're looking for a compact car for city driving or an SUV for a<br>
-            family adventure, we've got you covered.
+            Explore our wide range of cars and enjoy the freedom of the open road.
+            Whether you're looking for a compact car for city driving or an SUV for a family adventure, we've got you covered.
         </p>
         <a asp-controller="Home" asp-action="Rent" class="btn btn-primary">Book Now</a>
     </div>
 </div>
 
+<!-- ✅ Advertisements Section -->
 <div class="container mt-5">
-    <h2 class="text-center mb-4">" Advertisements "</h2>
-    <div class="row mb-4">
+    <h2 class="text-center mb-4">Advertisements</h2>
+
+    <div class="row mb-4 align-items-center">
         <div class="col-md-4">
-            <img src="~/images/ad1.png" class="img-fluid ad-img" alt="Ad 1">
+            <img src="~/images/ad1.png" class="img-fluid ad-img" alt="Weekend Getaway Deals">
         </div>
         <div class="col-md-8">
-            <h3 style="margin: 20px;">Weekend Getaway Deals</h3>
+            <h3 class="ad-title">Weekend Getaway Deals</h3>
             <p class="ad-text">
-                🚗 Weekend Getaway Deals 🚗
-                Looking for the perfect ride for your weekend escape? Enjoy our exclusive weekend rental rates and hit the road in style! Whether it’s a scenic drive through breathtaking landscapes,
-                a relaxing beach retreat with golden sands and ocean breezes, or an exciting city adventure filled with nightlife and attractions, we’ve got the perfect vehicle for you. With a wide selection of well-maintained cars, 
-                flexible rental options, and unbeatable prices, your next getaway is just a drive away. Book now and make your weekend unforgettable!<br />
-
-                ✨ Affordable Rates <br />
-                🚘 Wide Selection of Vehicles<br />
-                📅 Flexible Rental Periods<br />
-
+                🚗 Looking for the perfect ride for your weekend escape? Enjoy exclusive weekend rates and hit the road in style!
+                Whether it’s a scenic drive, a relaxing beach retreat, or an exciting city adventure, we’ve got the perfect vehicle for you.
+                <br><br>
+                ✨ Affordable Rates • 🚘 Wide Selection • 📅 Flexible Rental Periods
+                <br><br>
                 Book now and make your getaway unforgettable!
             </p>
         </div>
     </div>
 
-    <div class="row mb-4">
-        <div class="col-md-8 order-md-1">
-            <h3 style="margin: 20px;">Luxury Cars for Less</h3>
+    <div class="row mb-4 align-items-center">
+        <div class="col-md-8">
+            <h3 class="ad-title">Luxury Cars for Less</h3>
             <p class="ad-text">
                 ✨ Drive in Style, Pay Less! ✨
-
-                Experience the ultimate comfort and sophistication without breaking the bank. Our premium selection of luxury cars lets you enjoy a first-class driving 
-                experience at an affordable price. Whether you're looking to impress at a business event, make a grand entrance at a special occasion, or simply indulge in a smooth and stylish ride, 
-                we have the perfect vehicle for you. With top-tier features, impeccable interiors, 
-                and a fleet of high-end models to choose from, your journey will be as luxurious as your destination. Book now and redefine the way you travel!<br />
-
-                🚗 High-end vehicles for every occasion<br />
-                💎 Impeccable interiors & top-tier features<br />
-                📅 Flexible rental plans tailored to your needs<br />
-
-                Whether you're heading to a business meeting, celebrating a special event, or just want to cruise in style, 
-                we’ve got the perfect luxury car for you. Book now and elevate your ride! 🚘💨
+                Experience ultimate comfort and sophistication at an affordable price. Whether you need a ride for business, a special occasion, or just want to cruise in style, we've got the perfect luxury car for you.
+                <br><br>
+                🚗 High-end Vehicles • 💎 Impeccable Interiors • 📅 Flexible Rental Plans
+                <br><br>
+                Book now and elevate your ride! 🚘💨
             </p>
         </div>
-        <div class="col-md-4 order-md-2">
-            <img src="~/images/ad2.png" class="img-fluid ad-img" alt="Ad 2">
+        <div class="col-md-4">
+            <img src="~/images/ad2.png" class="img-fluid ad-img" alt="Luxury Cars">
         </div>
     </div>
 
-    <div class="row mb-4">
+    <div class="row mb-4 align-items-center">
         <div class="col-md-4">
-            <img src="~/images/ad3.png" class="img-fluid ad-img" alt="Ad 3">
+            <img src="~/images/ad3.png" class="img-fluid ad-img" alt="Special Offer on SUVs">
         </div>
         <div class="col-md-8">
-            <h3 style="margin: 20px;">Special Offer on SUVs</h3>
+            <h3 class="ad-title">Special Offer on SUVs</h3>
             <p class="ad-text">
-                Looking for a spacious, reliable, and comfortable ride for your next adventure? Whether you're planning a road trip, a family vacation, 
-                or an outdoor getaway, our premium SUVs offer the perfect blend of performance, safety, and convenience. Take advantage of our exclusive 
-                rental discounts and enjoy a hassle-free travel experience with ample seating, generous cargo space, and top-tier features designed for 
-                comfort and security. From scenic highways to rugged terrains, our well-maintained SUVs are built to handle every journey with ease.<br />
-               
-                ✅ Comfort & Space – Plenty of room for passengers and luggage<br />
-                ✅ Versatility – Ideal for city drives, road trips, and off-road adventures<br />
-                ✅ Safety & Performance – Equipped with advanced safety features and powerful engines<br />
-
-                📅 Limited-Time Offer – Book now and save big on your next SUV rental! Don't miss out on this deal—reserve your ride today and hit the road with confidence! 🚙💨
+                Need a spacious and reliable ride for your next adventure? Our premium SUVs offer performance, safety, and comfort at unbeatable prices.
+                <br><br>
+                ✅ Comfort & Space • ✅ Versatility • ✅ Safety & Performance
+                <br><br>
+                📅 Limited-Time Offer – Book now and save big on your next SUV rental! 🚙💨
             </p>
         </div>
     </div>
 </div>
 
+<!-- ✅ About Us Section -->
 <div class="container mt-5">
-    <h2 class="text-center mb-4">" About Us "</h2>
+    <h2 class="text-center mb-4">About Us</h2>
     <div class="about-us-slider">
         <div class="about-us-slide active">
             <h2>Who We Are</h2>
-            <p>
-                At Vehicle Rental, we are committed to providing a seamless and hassle-free car rental experience. Whether you need a compact car for city travel,
-                a spacious SUV for a family road trip, or a luxury ride for a special occasion, we have a wide selection of vehicles to meet your needs.
-            </p>
-            <div class="slide-nav">
-                <button class="prev-slide">&lt;</button>
-                <button class="next-slide">&gt;</button>
-            </div>
+            <p>We provide a seamless and hassle-free car rental experience with a wide selection of vehicles for every need.</p>
         </div>
         <div class="about-us-slide">
             <h2>Our Mission</h2>
-            <p>
-                Our mission is to make vehicle rentals affordable, convenient, and accessible for everyone.
-                We strive to offer a diverse fleet of well-maintained vehicles, flexible rental terms, and
-                top-tier customer support to ensure a smooth journey from start to finish.
-            </p>
-            <div class="slide-nav">
-                <button class="prev-slide">&lt;</button>
-                <button class="next-slide">&gt;</button>
-            </div>
+            <p>We make vehicle rentals affordable, convenient, and accessible with well-maintained vehicles and top-tier customer support.</p>
         </div>
         <div class="about-us-slide">
             <h2>Why Choose Us?</h2>
             <p>
-                ✅ Wide Selection of Vehicles – From economy cars to luxury SUVs, we've got you covered. <br />
-                ✅ Affordable Rates – Competitive pricing with no hidden fees.<br />
-                ✅ Convenient Booking – Easy online reservation and hassle-free rental process.<br />
-                ✅ Reliable Support – 24/7 customer assistance for a stress-free experience.<br />
+                ✅ Wide Selection • ✅ Affordable Rates • ✅ Easy Booking • ✅ Reliable Support
             </p>
-            <div class="slide-nav">
-                <button class="prev-slide">&lt;</button>
-                <button class="next-slide">&gt;</button>
-            </div>
         </div>
         <div class="about-us-slide">
             <h2>Our Commitment</h2>
-            <p>
-                We believe in providing quality service and safety. All our vehicles undergo regular maintenance and inspection to ensure
-                your peace of mind on the road.<br /> <br />
-
-                🚗 Your journey starts with us. Book your ride today! 🚗
-            </p>
-            <div class="slide-nav">
-                <button class="prev-slide">&lt;</button>
-                <button class="next-slide">&gt;</button>
-            </div>
+            <p>All our vehicles undergo regular maintenance and inspection to ensure your safety on the road. 🚗 Book your ride today!</p>
         </div>
     </div>
 </div>
 
+<!-- ✅ Testimonials Section -->
 <div class="container mt-5">
-    <h2 class="text-center mb-4">" Testimonials "</h2>
+    <h2 class="text-center mb-4">Testimonials</h2>
     <div class="row">
         <div class="col-md-3 mb-4">
-            <div class="card h-100 shadow-sm">
-                <img src="~/images/lebron.png" class="card-img-top reviewer-img" alt="Reviewer 1">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Leborn James</h5>
-                    <p class="card-text">"Man, the service was top-tier! The car was in prime condition, and the whole rental process was smooth like a fast break. 
-                        No hassle, just straight-up convenience. Big props to the team!" 🚗🔥💪"</p>
+            <div class="card h-100 shadow-sm text-center">
+                <img src="~/images/lebron.png" class="card-img-top reviewer-img" alt="LeBron James">
+                <div class="card-body">
+                    <h5 class="card-title">LeBron James</h5>
+                    <p class="card-text">"The service was top-tier! Smooth process, no hassle. Big props to the team!" 🚗🔥</p>
                 </div>
             </div>
         </div>
         <div class="col-md-3 mb-4">
-            <div class="card h-100 shadow-sm">
-                <img src="~/images/woke.jpg" class="card-img-top reviewer-img" alt="Reviewer 2">
-                <div class="card-body text-center">
+            <div class="card h-100 shadow-sm text-center">
+                <img src="~/images/woke.jpg" class="card-img-top reviewer-img" alt="Jane Smith">
+                <div class="card-body">
                     <h5 class="card-title">Jane Smith</h5>
                     <p class="pronoun-text">they/them</p>
-                    <p class="card-text">"I had a wonderful experience with Vehicle Rental! The staff was super welcoming, and the car was absolutely perfect for our trip. 
-                        Everything was smooth and stress-free. Definitely recommending this to my friends!"🌈🚗💜</p>
+                    <p class="card-text">"Wonderful experience! Staff was welcoming, car was perfect. Highly recommended!" 🌈🚗💜</p>
                 </div>
             </div>
         </div>
         <div class="col-md-3 mb-4">
-            <div class="card h-100 shadow-sm">
-                <img src="~/images/furry.jpg" class="card-img-top reviewer-img" alt="Reviewer 3">
-                <div class="card-body text-center">
+            <div class="card h-100 shadow-sm text-center">
+                <img src="~/images/furry.jpg" class="card-img-top reviewer-img" alt="Christofer Furry">
+                <div class="card-body">
                     <h5 class="card-title">Christofer Furry</h5>
-                            <p class="card-text">"Yip yip! 🐾 Fantastic selection of cars at super affordable rates! The whole process was smooth,
-                                and I’ll definitely be renting from them again. Paws up for great service! 🐺🚗✨" </p>
+                    <p class="card-text">"Fantastic cars, super affordable rates! Will rent again!" 🐺🚗✨</p>
                 </div>
             </div>
         </div>
         <div class="col-md-3 mb-4">
-            <div class="card h-100 shadow-sm">
-                <img src="~/images/tylerjpeg.jpeg" class="card-img-top reviewer-img" alt="Reviewer 4">
-                <div class="card-body text-center">
+            <div class="card h-100 shadow-sm text-center">
+                <img src="~/images/tylerjpeg.jpeg" class="card-img-top reviewer-img" alt="Tyler The Creator">
+                <div class="card-body">
                     <h5 class="card-title">Tyler The Creator</h5>
-                    <p class="card-text">"Ayo, booking was mad easy, no stress, no BS. Car was clean, ran smooth—like, actually dope.
-                        Y’all need a ride? This the spot. 10/10."</p>
+                    <p class="card-text">"Mad easy booking, no stress. Clean car, smooth ride. This the spot!"</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 @section Scripts {
     <script src="~/js/slider.js" asp-append-version="true"></script>
 }

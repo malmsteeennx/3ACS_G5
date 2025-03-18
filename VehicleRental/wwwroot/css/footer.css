@@ -1,27 +1,52 @@
 ﻿.footer {
     background-color: #007bff;
-    color: white; /* Set all text to white */
-    padding: 20px;
+    color: white;
+    padding: 30px 20px;
     text-align: center;
+    font-size: 14px;
+    position: relative;
 }
 
-.logo-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-bottom: 10px;
-}
+    .footer .logo-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 15px;
+        flex-wrap: wrap; /* Ensures responsiveness */
+    }
 
-.logo {
-    height: 50px;
-}
+    .footer .logo {
+        height: 50px;
+        max-width: 100px;
+    }
 
-.footer-link {
-    color: white; /* Keep GitHub link white */
-    text-decoration: none;
-    margin: 0 10px;
-}
+    .footer .footer-text {
+        margin-bottom: 10px;
+        font-weight: 500;
+    }
 
-    .footer-link:hover {
-        text-decoration: underline;
+    .footer .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+    }
+
+    .footer .footer-link {
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease-in-out;
+    }
+
+        .footer .footer-link:hover {
+            text-decoration: underline;
+            color: #f8f9fa; /* Lighter shade on hover */
+        }
+
+    .footer .copyright {
+        font-size: 12px;
+        opacity: 0.8;
     }
