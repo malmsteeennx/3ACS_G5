@@ -1,4 +1,45 @@
 ﻿body {
+    .about-us-slider {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .about-us-slide {
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        transform: translateX(100%);
+        transition: all 0.5s ease;
+        padding: 20px;
+    }
+
+    .about-us-slide.active {
+        opacity: 1;
+        position: relative;
+        transform: translateX(0);
+    }
+
+    .slide-nav {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+    .prev-slide, .next-slide {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .prev-slide:hover, .next-slide:hover {
+        background-color: #0056b3;
+    }
     background-color: whitesmoke;
 }
 
