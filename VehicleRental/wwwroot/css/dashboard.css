@@ -22,20 +22,62 @@
     border-radius: 8px;
 }
 
-.car-box {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 15px;
+/* ✅ Ensure card container is flexible and aligned */
+.card {
+    background: white;
     border-radius: 15px;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    min-height: 150px;
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; /* ✅ Makes all cards equal height */
 }
 
-    .car-box img {
-        width: 100px;
-        height: 100px;
-        border-radius: 10px;
+    /* ✅ Hover Effect */
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.3);
     }
+
+/* ✅ Ensure image fits nicely */
+.card-img-top {
+    width: 100%;
+    height: 230px; /* ✅ Fixed height for uniformity */
+    object-fit: cover; /* ✅ Ensures proper scaling */
+    border-radius: 10px;
+}
+
+/* ✅ Properly space text & buttons */
+.card-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    padding: 15px;
+}
+
+/* ✅ Fix button alignment */
+.card .btn {
+    margin-top: auto;
+}
+
+/* ✅ Make sure the container aligns properly */
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+}
+
+/* ✅ Ensure image is not cropped */
+.car-box img {
+    max-width: 100%; /* ✅ Prevents stretching */
+    height: auto; /* ✅ Adjusts based on aspect ratio */
+    border-radius: 10px;
+}
+
 
 /* ✅ Placeholder Box */
 .placeholder-box {

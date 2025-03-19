@@ -5,21 +5,38 @@
 <!-- ✅ Link External CSS -->
 <link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true" />
 
-
 <div class="container-fluid dashboard-container p-4">
     <!-- ✅ Navbar with Owner's Name -->
     <div class="d-flex justify-content-between align-items-center navbar-custom mb-4">
         <h2 class="text-dark fw-bold">My Vehicles</h2>
     </div>
 
+    <!-- ✅ Flash Messages -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+            @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
     <div class="row">
         @if (ViewBag.MyVehicles != null && ViewBag.MyVehicles.Count > 0)
         {
             @foreach (var vehicle in ViewBag.MyVehicles)
             {
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="card shadow-sm border-0">
-                        <img src="~/images/@vehicle.Image" class="card-img-top" alt="@vehicle.Name">
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm">
+                        <img src="@vehicle.Image" class="card-img-top" alt="@vehicle.Name"
+                             onerror="this.src='/images/default-car.png'">
                         <div class="card-body text-center">
                             <h5 class="fw-bold">@vehicle.Name</h5>
                             <p class="text-muted">Model: @vehicle.Model | Year: @vehicle.Year</p>
