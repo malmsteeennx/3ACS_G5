@@ -1,0 +1,67 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "Admin Login";
+}
+
+<!-- ✅ Link External CSS -->
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/logsign.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/loader.css" asp-append-version="true" />
+
+<!-- ✅ Loader (Hidden by Default) -->
+<div id="loader" class="loader-overlay" style="display: none;">
+    <div class="spinner"></div>
+    <p>Logging in...</p>
+</div>
+
+<div class="auth-container">
+    <div class="auth-card">
+        <h2 class="text-center mb-3">Admin Login</h2>
+        <p class="text-center text-muted">Enter admin credentials to access the dashboard.</p>
+
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger text-center">@TempData["ErrorMessage"]</div>
+        }
+
+        <form method="post" asp-action="Login" asp-controller="Admin" id="adminLoginForm">
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                <input type="text" class="form-control" name="Username" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <div class="input-group">
+                    <input type="password" class="form-control" id="adminPassword" name="Password" required>
+                    <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('adminPassword')">
+                        <i class="bi bi-eye"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="d-grid">
+                <button type="submit" class="btn btn-dark btn-lg" id="loginButton">Login</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ✅ Scripts -->
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/loader.js"></script>
+
+@section Scripts {
+    <script>
+        document.getElementById("adminLoginForm").addEventListener("submit", function () {
+            document.getElementById("loader").style.display = "flex";
+            document.getElementById("loginButton").disabled = true;
+        });
+
+        function togglePassword(id) {
+            var input = document.getElementById(id);
+            input.type = input.type === "password" ? "text" : "password";
+        }
+    </script>
+}

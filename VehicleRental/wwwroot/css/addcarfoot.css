@@ -1,0 +1,75 @@
+﻿/* Footer Styles */
+.footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 3rem;
+}
+
+    .footer h5 {
+        font-weight: 600;
+        position: relative;
+        padding-bottom: 10px;
+    }
+
+        .footer h5::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 2px;
+            width: 50px;
+            background-color: #ffc107;
+        }
+
+    .footer a:hover {
+        color: #ffc107 !important;
+        transition: all 0.3s ease;
+    }
+
+    .footer .social-icons a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 36px;
+        width: 36px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        margin-right: 10px;
+        transition: all 0.3s ease;
+    }
+
+        .footer .social-icons a:hover {
+            background-color: #ffc107;
+            color: #343a40 !important;
+        }
+
+    .footer .list-unstyled li {
+        padding: 4px 0;
+    }
+
+    .footer .list-unstyled a {
+        transition: all 0.3s ease;
+    }
+
+        .footer .list-unstyled a:hover {
+            padding-left: 5px;
+        }
+
+/* Make footer stick to bottom if content is short */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* viewport height */
+}
+
+.container, main {
+    flex: 1 0 auto; /* This makes the content area expand to fill available space */
+}
+
+footer {
+    flex-shrink: 0; /* Prevents the footer from shrinking */
+}

@@ -1,0 +1,66 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdminDashboard.cshtml";
+    ViewData["Title"] = "Car Approvals";
+}
+
+<link rel="stylesheet" href="~/css/admin.css" asp-append-version="true">
+
+<div class="container-fluid">
+    <h2 class="text-center mb-4">Pending Car Approvals</h2>
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Image</th>
+                    <th>Owner</th>
+                    <th>Car Name</th>
+                    <th>Model</th>
+                    <th>Year</th>
+                    <th>Fuel Type</th>
+                    <th>Price</th>
+                    <th>Date Posted</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var vehicle in ViewBag.PendingVehicles)
+                {
+                    <tr>
+                        <td>@vehicle.Id</td>
+                        <td>
+                            <img src="@vehicle.Image" alt="Car Image" class="car-image"
+                                 onerror="this.src='/images/default-car.png'">
+                        </td>
+                        <td>@vehicle.Owner?.Name</td>
+                        <td>@vehicle.Name</td>
+                        <td>@vehicle.Model</td>
+                        <td>@vehicle.Year</td>
+                        <td>@vehicle.FuelType</td>
+                        <td>$@vehicle.Price/day</td>
+                        <td>@vehicle.DatePosted.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td>
+                            <a asp-action="ApproveVehicle" asp-route-id="@vehicle.Id" class="btn btn-success btn-sm">Approve</a>
+                            <a asp-action="RejectVehicle" asp-route-id="@vehicle.Id" class="btn btn-danger btn-sm">Reject</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var triggerTabList = [].slice.call(document.querySelectorAll('#adminTabs a'));
+            triggerTabList.forEach(function (tab) {
+                tab.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    new bootstrap.Tab(tab).show();
+                });
+            });
+        });
+    </script>
+}

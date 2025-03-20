@@ -3,6 +3,12 @@
 }
 <link rel="stylesheet" href="~/css/logsign.css" asp-append-version="true">
 
+<!-- ✅ Login Loader (Initially Hidden) -->
+<div id="loginLoader" class="login-loader" style="display: none;">
+    <div class="spinner"></div>
+    <p>Logging in...</p>
+</div>
+
 <div class="auth-container">
     <div class="auth-card">
         <h2 class="text-center mb-3">Login</h2>
@@ -18,7 +24,7 @@
             <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
         }
 
-        <form method="post" asp-action="Login">
+        <form method="post" asp-action="Login" id="loginForm">
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email" name="email" required>
@@ -35,7 +41,7 @@
             </div>
 
             <div class="d-grid">
-                <button type="submit" class="btn btn-primary btn-lg">Login</button>
+                <button type="submit" class="btn btn-primary btn-lg" id="loginButton">Login</button>
             </div>
         </form>
 
@@ -44,3 +50,19 @@
         </p>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const loginForm = document.getElementById("loginForm");
+            const loginLoader = document.getElementById("loginLoader");
+            const loginButton = document.getElementById("loginButton");
+
+            loginForm.addEventListener("submit", function (event) {
+                // ✅ Show loader only when Login is clicked
+                loginLoader.style.display = "flex";
+                loginButton.disabled = true; // Prevent multiple clicks
+            });
+        });
+    </script>
+}

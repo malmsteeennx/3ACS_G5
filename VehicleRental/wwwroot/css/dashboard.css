@@ -21,6 +21,36 @@
     padding: 10px;
     border-radius: 8px;
 }
+.navbar-nav {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adds space between buttons */
+}
+
+    .navbar-nav .btn {
+        padding: 8px 20px;
+        font-size: 16px;
+        border-radius: 8px; /* Rounded edges */
+    }
+
+/* Adjusting specific button colors */
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-danger:hover {
+    background-color: #a71d2a;
+}
 
 /* ✅ Ensure card container is flexible and aligned */
 .card {
@@ -97,3 +127,23 @@
     .btn-custom:hover {
         background: #c08457;
     }
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* viewport height */
+}
+
+.container, main {
+    flex: 1 0 auto; /* This makes the content area expand to fill available space */
+}
+
+footer {
+    flex-shrink: 0; /* Prevents the footer from shrinking */
+}
+

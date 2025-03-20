@@ -33,5 +33,8 @@ namespace VehicleRental.Models
 
         [ForeignKey("OwnerId")]
         public virtual Owner Owner { get; set; }
+
+        [DataType(DataType.DateTime)]
+        public DateTime DatePosted { get; set; } = DateTime.Now;
     }
 }

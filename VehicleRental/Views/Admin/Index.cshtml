@@ -1,0 +1,118 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdminDashboard.cshtml";
+    ViewData["Title"] = "Admin Panel";
+}
+
+<link rel="stylesheet" href="~/css/admin.css" asp-append-version="true">
+
+<div class="container-fluid">
+    <h2 class="text-center mb-4">Admin Panel</h2>
+
+    <ul class="nav nav-tabs" id="adminTabs">
+        <li class="nav-item">
+            <a class="nav-link active" id="all-vehicles-tab" data-bs-toggle="tab" href="#allVehicles">Vehicles</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="all-owners-tab" data-bs-toggle="tab" href="#allOwners">Owners</a>
+        </li>
+    </ul>
+
+    <div class="tab-content mt-4">
+        <div class="tab-pane fade show active" id="allVehicles">
+            <h3>Vehicles</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>ID</th>
+                            <th>Image</th>
+                            <th>Owner</th>
+                            <th>Car Name</th>
+                            <th>Model</th>
+                            <th>Year</th>
+                            <th>Fuel Type</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                            <th>Date Posted</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var vehicle in ViewBag.AllVehicles)
+                        {
+                            <tr>
+                                <td>@vehicle.Id</td>
+                                <td>
+                                    <img src="@vehicle.Image" alt="Car Image" class="car-image"
+                                         onerror="this.src='/images/default-car.png'">
+                                </td>
+                                <td>@vehicle.Owner?.Name</td>
+                                <td>@vehicle.Name</td>
+                                <td>@vehicle.Model</td>
+                                <td>@vehicle.Year</td>
+                                <td>@vehicle.FuelType</td>
+                                <td>$@vehicle.Price/day</td>
+                                <td class="fw-bold @(vehicle.Status == "Available" ? "text-success" : vehicle.Status == "Rejected" ? "text-danger" : "text-warning")">
+                                    @vehicle.Status
+                                </td>
+                                <td>@vehicle.DatePosted.ToString("yyyy-MM-dd HH:mm")</td>
+                                <td>
+                                    <a asp-action="EditVehicle" asp-route-id="@vehicle.Id" class="btn btn-warning btn-sm">Edit</a>
+                                    <a asp-action="DeleteVehicle" asp-route-id="@vehicle.Id" class="btn btn-danger btn-sm">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="allOwners">
+            <h3>Vehicle Owners</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="table-info">
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Verified</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var owner in ViewBag.AllOwners)
+                        {
+                            <tr>
+                                <td>@owner.Id</td>
+                                <td>@owner.Name</td>
+                                <td>@owner.Email</td>
+                                <td class="fw-bold @(owner.IsVerified ? "text-success" : "text-danger")">
+                                    @(owner.IsVerified ? "Yes" : "No")
+                                </td>
+                                <td>
+                                    <a asp-action="EditOwner" asp-route-id="@owner.Id" class="btn btn-warning btn-sm">Edit</a>
+                                    <a asp-action="DeleteOwner" asp-route-id="@owner.Id" class="btn btn-danger btn-sm">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var triggerTabList = [].slice.call(document.querySelectorAll('#adminTabs a'));
+            triggerTabList.forEach(function (tab) {
+                tab.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    new bootstrap.Tab(tab).show();
+                });
+            });
+        });
+    </script>
+}

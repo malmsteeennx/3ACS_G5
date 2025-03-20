@@ -74,13 +74,13 @@ namespace VehicleRental.Controllers
                 return RedirectToAction("AddCar");
             }
 
-            // ✅ Check if a car with the same details already exists
+            // ✅ Check if a car with the same details already exists for this owner
             bool carExists = await _context.Vehicles.AnyAsync(v =>
                 v.Name == Name &&
                 v.Model == Model &&
                 v.Year == Year &&
-                v.FuelType == FuelType &&
                 v.SeatCapacity == SeatCapacity &&
+                v.FuelType == FuelType &&
                 v.OwnerId == OwnerId
             );
 
@@ -100,15 +100,17 @@ namespace VehicleRental.Controllers
                 OwnerId = OwnerId,
                 Image = string.IsNullOrEmpty(Image) ? "default-car.png" : Image,
                 Price = Price,
-                Status = "Available"
+                Status = "Pending Approval", // ✅ Admin needs to approve first
+                DatePosted = DateTime.Now  // ✅ Save the date it was added
             };
 
             _context.Vehicles.Add(vehicle);
             await _context.SaveChangesAsync();
 
-            TempData["SuccessMessage"] = "Car added successfully!";
-            return RedirectToAction("AddCar");
+            TempData["SuccessMessage"] = "Car added successfully! Waiting for admin approval.";
+            return RedirectToAction("MyCars");
         }
+
 
         // ✅ Remove Vehicle
         [HttpPost]
