@@ -1,0 +1,44 @@
+﻿.search-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#searchInput {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search-container button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    .search-container button:hover {
+        background-color: #0056b3;
+    }
+
+.reservation-steps {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+    .reservation-steps h2 {
+        color: #333;
+    }
+
+    .reservation-steps ol {
+        padding-left: 20px;
+    }
+
+    .reservation-steps li {
+        margin-bottom: 10px;
+        font-size: 16px;
+    }

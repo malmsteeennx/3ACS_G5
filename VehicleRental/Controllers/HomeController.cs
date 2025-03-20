@@ -27,6 +27,11 @@ namespace VehicleRental.Controllers
             return View();
         }
 
+        public IActionResult Reservation()
+        {
+            return View();
+        }
+
         // ✅ Display Available Vehicles for Rent
         public async Task<IActionResult> Rent()
         {
