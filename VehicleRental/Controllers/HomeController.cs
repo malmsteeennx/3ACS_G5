@@ -43,6 +43,7 @@ namespace VehicleRental.Controllers
                     Id = v.Id,
                     Name = v.Name ?? "Unknown",  // ✅ Handle NULL values
                     Model = v.Model ?? "Not specified",  // ✅ Handle NULL values
+                    CarType = v.CarType ?? "Not specified",
                     Year = v.Year != 0 ? v.Year : 2000,  // ✅ Set a default value if NULL
                     SeatCapacity = v.SeatCapacity != 0 ? v.SeatCapacity : 4, // ✅ Default seat capacity
                     FuelType = v.FuelType ?? "Unknown", // ✅ Handle NULL values

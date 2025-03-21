@@ -11,7 +11,7 @@ namespace VehicleRental.Models
         [Required]
         public string Name { get; set; } = "Unknown";
 
-        public string CarType { get; set; } = "Not specified";
+        public string CarType { get; set; }
 
         public string Model { get; set; } = "Not specified";
 
