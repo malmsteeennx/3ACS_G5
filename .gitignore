@@ -398,4 +398,3 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
-/VehicleRental/Controllers/OwnerController.cs
