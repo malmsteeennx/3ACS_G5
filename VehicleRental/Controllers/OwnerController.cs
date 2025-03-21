@@ -61,7 +61,7 @@ namespace VehicleRental.Controllers
 
         // ✅ Add Vehicle (Handles Form Submission)
         [HttpPost]
-        public async Task<IActionResult> AddCar(int OwnerId, string Name, string Model, int Year, int SeatCapacity, string FuelType, decimal Price, string Image, string AvailableDays)
+        public async Task<IActionResult> AddCar(int OwnerId, string Name, string CarType, string Model, int Year, int SeatCapacity, string FuelType, decimal Price, string Image, string AvailableDays)
         {
             if (HttpContext.Session.GetString("OwnerLoggedIn") != "true")
             {
@@ -77,6 +77,7 @@ namespace VehicleRental.Controllers
             // ✅ Check if a car with the same details already exists for this owner
             bool carExists = await _context.Vehicles.AnyAsync(v =>
                 v.Name == Name &&
+                v.CarType == CarType &&
                 v.Model == Model &&
                 v.Year == Year &&
                 v.SeatCapacity == SeatCapacity &&
@@ -94,6 +95,7 @@ namespace VehicleRental.Controllers
             {
                 Name = Name,
                 Model = Model,
+                CarType = CarType,
                 Year = Year,
                 SeatCapacity = SeatCapacity,
                 FuelType = FuelType,

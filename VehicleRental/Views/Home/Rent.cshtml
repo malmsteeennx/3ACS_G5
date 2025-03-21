@@ -41,6 +41,10 @@
                                 {
                                     <span class="d-block"><strong>Model:</strong> @vehicle.Model</span>
                                 }
+                                @if (!string.IsNullOrEmpty(vehicle.CarType))
+                                {
+                                    <span class="d-block"><strong>Car Type:</strong> @vehicle.CarType</span>
+                                }
                                 @if (vehicle.Year > 0)
                                 {
                                     <span class="d-block"><strong>Year:</strong> @vehicle.Year</span>
