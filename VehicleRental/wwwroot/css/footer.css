@@ -15,7 +15,7 @@
             display: block;
             width: 50px;
             height: 2px;
-            background: #ffc107;
+            background: #0d6efd;
             margin: 8px auto;
         }
 
@@ -63,15 +63,15 @@
     transition: all 0.3s ease-in-out; /* Smooth resizing */
 }
 
-@media (max-width: 768px) {
+@media (max-width: 800px) {
     .footer-logo {
-        max-width: 50px; /* Smaller screens */
+        max-width: 60px; /* Smaller screens */
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 800px) {
     .footer-logo {
-        max-width: 40px; /* Even smaller screens */
+        max-width: 60px; /* Even smaller screens */
     }
 }
 
@@ -110,6 +110,7 @@
 .footer h6 {
     font-weight: bold;
     margin-bottom: 10px;
+    color: #0d6efd;
 }
 
     .footer h6::after {
@@ -117,7 +118,7 @@
         display: block;
         width: 50px;
         height: 2px;
-        background: #ffc107;
+        background: #0d6efd;
         margin: 5px auto;
     }
 
