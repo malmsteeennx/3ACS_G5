@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Reservation Form";
+}
+<link rel="stylesheet" href="~/css/reservation.css" asp-append-version="true" />
+
+<div class="reservation-form">
+    <h2>Enter Your Details</h2>
+    <form method="post" action="/Reservation/Confirm">
+        <input type="hidden" name="VehicleId" value="@ViewBag.Car.Id">
+        <label>Name:</label>
+        <input type="text" name="Name" required>
+
+        <label>Contact Info:</label>
+        <input type="text" name="ContactInfo" required>
+
+        <label>Pickup Location:</label>
+        <input type="text" name="PickupLocation" required>
+
+        <label>Dropoff Location:</label>
+        <input type="text" name="DropoffLocation" required>
+
+        <label>Pickup Date:</label>
+        <input type="date" name="PickupDate" required>
+
+        <label>Dropoff Date:</label>
+        <input type="date" name="DropoffDate" required>
+
+        <button type="submit">Confirm Reservation</button>
+    </form>
+</div>

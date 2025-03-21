@@ -1,44 +1,125 @@
-﻿.search-container {
+﻿/* 🔹 Loader Overlay */
+.loader-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #ccc;
+    border-top: 5px solid #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* 🔹 Search Box */
+.search-container {
     text-align: center;
-    margin-bottom: 20px;
+    margin: 30px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 650px;
 }
 
-#searchInput {
-    width: 300px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.search-container button {
-    padding: 10px 15px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-    .search-container button:hover {
-        background-color: #0056b3;
-    }
-
-.reservation-steps {
-    background-color: #f8f9fa;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-    .reservation-steps h2 {
-        color: #333;
-    }
-
-    .reservation-steps ol {
-        padding-left: 20px;
-    }
-
-    .reservation-steps li {
-        margin-bottom: 10px;
+    /* 🔹 Input Fields */
+    .search-container input {
+        width: calc(100% - 24px);
+        padding: 12px;
+        margin: 8px 0;
+        border: 1px solid #ccc;
+        border-radius: 8px;
         font-size: 16px;
+        display: block;
+        margin: 10px auto;
+    }
+
+    /* 🔹 Search Button */
+    .search-container button {
+        width: 100%;
+        padding: 12px;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+        .search-container button:hover {
+            background: #0056b3;
+        }
+
+/* 🔹 Car Listings */
+.car-results {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.car-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* 🔹 Car Cards */
+.car-card {
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    text-align: center;
+}
+
+    .car-card img {
+        width: 100%;
+        border-radius: 8px;
+    }
+
+    .car-card:hover {
+        transform: translateY(-5px);
+    }
+
+/* 🔹 Rent Button */
+.rent-button {
+    display: block;
+    margin-top: 10px;
+    padding: 12px;
+    background: #28a745;
+    color: white;
+    text-align: center;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+    .rent-button:hover {
+        background: #218838;
     }

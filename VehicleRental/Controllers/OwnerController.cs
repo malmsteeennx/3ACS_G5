@@ -61,7 +61,7 @@ namespace VehicleRental.Controllers
 
         // ✅ Add Vehicle (Handles Form Submission)
         [HttpPost]
-        public async Task<IActionResult> AddCar(int OwnerId, string Name, string Model, int Year, int SeatCapacity, string FuelType, decimal Price, string Image)
+        public async Task<IActionResult> AddCar(int OwnerId, string Name, string Model, int Year, int SeatCapacity, string FuelType, decimal Price, string Image, string AvailableDays)
         {
             if (HttpContext.Session.GetString("OwnerLoggedIn") != "true")
             {
@@ -101,7 +101,8 @@ namespace VehicleRental.Controllers
                 Image = string.IsNullOrEmpty(Image) ? "default-car.png" : Image,
                 Price = Price,
                 Status = "Pending Approval", // ✅ Admin needs to approve first
-                DatePosted = DateTime.Now  // ✅ Save the date it was added
+                DatePosted = DateTime.Now,  // ✅ Save the date it was added
+                AvailableDays = string.IsNullOrEmpty(AvailableDays) ? "Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday" : AvailableDays
             };
 
             _context.Vehicles.Add(vehicle);
@@ -110,6 +111,7 @@ namespace VehicleRental.Controllers
             TempData["SuccessMessage"] = "Car added successfully! Waiting for admin approval.";
             return RedirectToAction("MyCars");
         }
+
 
 
         // ✅ Remove Vehicle

@@ -14,16 +14,16 @@
     <!-- ✅ Show Messages if Car was Added or Failed -->
     @if (TempData["ErrorMessage"] != null)
     {
-            <div class="alert alert-danger text-center">
+        <div class="alert alert-danger text-center">
             @TempData["ErrorMessage"]
-            </div>
+        </div>
     }
 
     @if (TempData["SuccessMessage"] != null)
     {
-            <div class="alert alert-success text-center">
+        <div class="alert alert-success text-center">
             @TempData["SuccessMessage"]
-            </div>
+        </div>
     }
 
     <!-- ✅ Add Car Form Container -->
@@ -69,6 +69,42 @@
                 <input type="text" class="form-control" name="Image" placeholder="Enter image URL">
             </div>
 
+            <!-- ✅ Available Days Section -->
+            <div class="mb-3">
+                <label class="form-label fw-bold">Available Days</label>
+                <div class="d-flex flex-wrap">
+                    <div class="form-check me-3">
+                        <input class="form-check-input day-checkbox" type="checkbox" value="Monday" id="monday" checked>
+                        <label class="form-check-label" for="monday">Monday</label>
+                    </div>
+                    <div class="form-check me-3">
+                        <input class="form-check-input day-checkbox" type="checkbox" value="Tuesday" id="tuesday" checked>
+                        <label class="form-check-label" for="tuesday">Tuesday</label>
+                    </div>
+                    <div class="form-check me-3">
+                        <input class="form-check-input day-checkbox" type="checkbox" value="Wednesday" id="wednesday" checked>
+                        <label class="form-check-label" for="wednesday">Wednesday</label>
+                    </div>
+                    <div class="form-check me-3">
+                        <input class="form-check-input day-checkbox" type="checkbox" value="Thursday" id="thursday" checked>
+                        <label class="form-check-label" for="thursday">Thursday</label>
+                    </div>
+                    <div class="form-check me-3">
+                        <input class="form-check-input day-checkbox" type="checkbox" value="Friday" id="friday" checked>
+                        <label class="form-check-label" for="friday">Friday</label>
+                    </div>
+                    <div class="form-check me-3">
+                        <input class="form-check-input day-checkbox" type="checkbox" value="Saturday" id="saturday" checked>
+                        <label class="form-check-label" for="saturday">Saturday</label>
+                    </div>
+                    <div class="form-check me-3">
+                        <input class="form-check-input day-checkbox" type="checkbox" value="Sunday" id="sunday" checked>
+                        <label class="form-check-label" for="sunday">Sunday</label>
+                    </div>
+                </div>
+                <input type="hidden" name="AvailableDays" id="AvailableDays">
+            </div>
+
             <div class="d-flex justify-content-between">
                 <button type="reset" class="btn btn-outline-secondary">Clear</button>
                 <button type="submit" class="btn btn-custom">Add</button>
@@ -81,3 +117,15 @@
         </div>
     </div>
 </div>
+
+<!-- ✅ JavaScript to Collect Selected Days Before Form Submission -->
+<script>
+    document.querySelector("form").addEventListener("submit", function (event) {
+        let selectedDays = [];
+        document.querySelectorAll(".day-checkbox:checked").forEach((checkbox) => {
+            selectedDays.push(checkbox.value);
+        });
+
+        document.getElementById("AvailableDays").value = selectedDays.join(",");
+    });
+</script>

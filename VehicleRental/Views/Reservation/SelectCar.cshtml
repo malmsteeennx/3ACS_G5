@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Select Car";
+}
+<link rel="stylesheet" href="~/css/reservation.css" asp-append-version="true" />
+
+<div class="car-details">
+    <h2>Car Details</h2>
+    <img src="@ViewBag.Car.Image" alt="Car Image" class="car-image">
+    <p><strong>Name:</strong> @ViewBag.Car.Name</p>
+    <p><strong>Model:</strong> @ViewBag.Car.Model</p>
+    <p><strong>Year:</strong> @ViewBag.Car.Year</p>
+    <p><strong>Price:</strong> $@ViewBag.Car.Price/day</p>
+    <button onclick="reserveNow()">Reserve Now</button>
+</div>
+
+<script>
+    function reserveNow() {
+        window.location.href = "/Reservation/Form";
+    }
+</script>

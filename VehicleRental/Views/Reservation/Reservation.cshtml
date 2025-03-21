@@ -1,0 +1,122 @@
+﻿@{
+    ViewData["Title"] = "Reservation";
+}
+
+<!-- 🔹 Loader -->
+<div id="loader" class="loader-overlay" style="display: none;">
+    <div class="spinner"></div>
+</div>
+
+<!-- 🔹 Search Box -->
+<div class="search-container">
+    <h2>Find Your Rental Car</h2>
+    <p>Enter your pick-up and drop-off details to find available cars.</p>
+
+    <!-- Location Input with Autocomplete -->
+    <input type="text" id="searchInput" placeholder="Enter pick-up location..." oninput="fetchLocations()" />
+    <ul id="suggestions" class="suggestion-list"></ul>
+
+    <input type="date" id="pickupDate" />
+    <input type="date" id="dropoffDate" />
+    <button id="searchBtn" onclick="searchCars()">Search</button>
+</div>
+
+<!-- 🔹 Available Cars Section -->
+<div class="car-results">
+    <h3>Available Cars</h3>
+    <div class="car-grid">
+        <div class="car-card">
+            <img src="~/images/default-car.png" alt="Car Image">
+            <h5>Toyota Corolla</h5>
+            <p>₱2,000/day - Gasoline</p>
+            <a href="#" class="rent-button">Reserve Now</a>
+        </div>
+
+        <div class="car-card">
+            <img src="~/images/default-car.png" alt="Car Image">
+            <h5>Honda Civic</h5>
+            <p>₱2,500/day - Diesel</p>
+            <a href="#" class="rent-button">Reserve Now</a>
+        </div>
+
+        <div class="car-card">
+            <img src="~/images/default-car.png" alt="Car Image">
+            <h5>Ford Everest</h5>
+            <p>₱3,000/day - Hybrid</p>
+            <a href="#" class="rent-button">Reserve Now</a>
+        </div>
+    </div>
+</div>
+
+<!-- 🔹 JavaScript for Search and Location Autocomplete -->
+<script>
+    function searchCars() {
+        let searchBtn = document.getElementById("searchBtn");
+        let loader = document.getElementById("loader");
+
+        searchBtn.disabled = true;
+        loader.style.display = "flex";
+
+        console.log("Search started...");
+
+        setTimeout(() => {
+            console.log("Search completed.");
+            loader.style.display = "none";
+            searchBtn.disabled = false;
+        }, 2000);
+    }
+
+    async function fetchLocations() {
+        let input = document.getElementById("searchInput").value;
+        let suggestionsBox = document.getElementById("suggestions");
+
+        // Clear previous suggestions
+        suggestionsBox.innerHTML = "";
+
+        if (input.length < 3) return; // Don't fetch for very short inputs
+
+        let url = `https://nominatim.openstreetmap.org/search?format=json&q=${input}`;
+
+        try {
+            let response = await fetch(url);
+            let data = await response.json();
+
+            data.forEach(place => {
+                let item = document.createElement("li");
+                item.textContent = place.display_name;
+                item.onclick = () => {
+                    document.getElementById("searchInput").value = place.display_name;
+                    suggestionsBox.innerHTML = ""; // Clear suggestions
+                };
+                suggestionsBox.appendChild(item);
+            });
+        } catch (error) {
+            console.error("Error fetching locations:", error);
+        }
+    }
+</script>
+
+<!-- 🔹 Styling for Location Suggestions -->
+<style>
+    .suggestion-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        border: 1px solid #ddd;
+        position: absolute;
+        background: white;
+        width: 300px;
+        max-height: 200px;
+        overflow-y: auto;
+        z-index: 1000;
+    }
+
+        .suggestion-list li {
+            padding: 8px;
+            cursor: pointer;
+        }
+
+            .suggestion-list li:hover {
+                background-color: #f0f0f0;
+            }
+</style>

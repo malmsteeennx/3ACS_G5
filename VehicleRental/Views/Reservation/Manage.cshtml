@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Manage Reservation";
+}
+<link rel="stylesheet" href="~/css/reservation.css" asp-append-version="true" />
+
+<div class="manage-reservation">
+    <h2>Manage Your Reservation</h2>
+    <form method="post" action="/Reservation/Manage">
+        <label>Booking ID:</label>
+        <input type="text" name="BookingId" required>
+
+        <label>PIN Code:</label>
+        <input type="text" name="PinCode" required>
+
+        <button type="submit">View Reservation</button>
+    </form>
+</div>

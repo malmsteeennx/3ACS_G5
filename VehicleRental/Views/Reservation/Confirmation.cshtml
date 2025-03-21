@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "Reservation Confirmed";
+}
+<link rel="stylesheet" href="~/css/reservation.css" asp-append-version="true" />
+
+<div class="confirmation">
+    <h2>Reservation Successful!</h2>
+    <p><strong>Booking ID:</strong> @ViewBag.BookingId</p>
+    <p><strong>PIN Code:</strong> @ViewBag.PinCode</p>
+    <p>Use these details to track your reservation.</p>
+    <a href="/Reservation/Manage">Manage Reservation</a>
+</div>

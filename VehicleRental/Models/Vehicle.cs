@@ -9,24 +9,24 @@ namespace VehicleRental.Models
         public int Id { get; set; }
 
         [Required]
-        public string Name { get; set; } = "Unknown";  // ✅ Default value
+        public string Name { get; set; } = "Unknown";
 
-        public string Model { get; set; } = "Not specified";  // ✅ Default value
+        public string Model { get; set; } = "Not specified";
 
-        public int Year { get; set; } = 2000;  // ✅ Default value
+        public int Year { get; set; } = 2000;
 
-        public int SeatCapacity { get; set; } = 4; // ✅ Default value
+        public int SeatCapacity { get; set; } = 4;
 
-        public string FuelType { get; set; } = "Unknown"; // ✅ Default value
+        public string FuelType { get; set; } = "Unknown";
 
         [Required]
         [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
 
-        public string Image { get; set; } = "default-car.png"; // ✅ Default value
+        public string Image { get; set; } = "default-car.png";
 
         [Required]
-        public string Status { get; set; } = "Available"; // ✅ Default value
+        public string Status { get; set; } = "Available";
 
         [Required]
         public int OwnerId { get; set; }
@@ -36,5 +36,8 @@ namespace VehicleRental.Models
 
         [DataType(DataType.DateTime)]
         public DateTime DatePosted { get; set; } = DateTime.Now;
+
+        // ✅ NEW: Available Days (Comma-separated string)
+        public string AvailableDays { get; set; } = "Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday";
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using VehicleRental.Controllers;
 using VehicleRental.Data;
 using VehicleRental.Services;
 
@@ -19,6 +20,9 @@ builder.Services.AddAuthentication();
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
+
+var scope = app.Services.CreateScope();
+
 
 // 🔹 Middleware setup
 if (!app.Environment.IsDevelopment())
